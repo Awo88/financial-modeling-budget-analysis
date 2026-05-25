@@ -76,4 +76,4 @@ python budget_model.py
 
 ---
 
-*Author: Adebola Awokoya — Applied Mathematics, Towson University (2024)*
+*Author: Adebola Awokoya — (2024)*
