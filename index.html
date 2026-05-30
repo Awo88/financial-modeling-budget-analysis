@@ -4,99 +4,215 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Financial Modeling & Budget Analysis</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#07090e;--surface:#0d1117;--surface2:#131920;--border:#1e2a3a;--border2:#2a3a50;--text:#e0ddd6;--muted:#4a5a70;--muted2:#6a7a90;--accent:#d4a853;--green:#7bc67e;--red:#e06868}
-body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:13px;min-height:100vh;padding:3rem 1.5rem 5rem}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
-.wrap{max-width:640px;margin:0 auto;position:relative;z-index:1}
-.tag{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
-h1{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:3rem;color:var(--accent);line-height:1;letter-spacing:-.01em;margin-bottom:.75rem}
-.sub{font-size:11px;color:var(--muted2);letter-spacing:.06em;line-height:1.8;margin-bottom:2.5rem;max-width:480px}
-.divider{height:1px;background:var(--border);margin:2rem 0}
-.section-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
-.body-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--muted2);line-height:1.9;margin-bottom:1.5rem}
-.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:2rem}
-.chip{font-size:9px;letter-spacing:.1em;padding:4px 12px;border-radius:2px;border:1px solid var(--border2);color:var(--muted2);text-transform:uppercase}
-.chip.lang{border-color:var(--accent);color:var(--accent)}
-.methods{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:2rem}
-.method{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:14px}
-.method-name{font-size:10px;color:var(--text);letter-spacing:.06em;margin-bottom:4px}
-.method-desc{font-size:10px;color:var(--muted);line-height:1.6}
-.scenarios{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:2rem}
-.scenario{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:12px;text-align:center}
-.scenario-label{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.scenario-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--accent)}
-.repo-link{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border:1px solid var(--border2);border-radius:3px;color:var(--muted2);font-size:10px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;margin-top:.5rem}
-.repo-link:hover{border-color:var(--accent);color:var(--accent)}
-.footer{margin-top:3rem;font-size:9px;color:var(--muted);letter-spacing:.06em}
+:root{--bg:#0d1117;--surface:#161b22;--surface2:#21262d;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--muted2:#6e7681;--accent:#d29922;--green:#3fb950;--yellow:#d29922;--purple:#bc8cff;--orange:#ffa657;--blue:#58a6ff}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;padding:0;margin:0}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.topbar-sep{color:var(--border)}
+.topbar a{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px}
+.topbar a:hover{color:var(--blue);text-decoration:none}
+.hero{padding:48px 24px 36px;max-width:900px;margin:0 auto}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.hero-title{font-size:2.2rem;font-weight:600;color:var(--text);line-height:1.2;margin-bottom:16px}
+.hero-title span{color:var(--accent)}
+.hero-desc{font-size:15px;color:var(--muted);max-width:580px;line-height:1.7;margin-bottom:28px}
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap}
+.stat-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.stat-dot{width:8px;height:8px;border-radius:50%}
+.stat-dot.b{background:var(--blue)}
+.stat-dot.g{background:var(--green)}
+.stat-dot.y{background:var(--yellow)}
+.stat-dot.p{background:var(--purple)}
+.stat-dot.o{background:var(--orange)}
+.main{max-width:900px;margin:0 auto;padding:0 24px 60px;display:grid;grid-template-columns:1fr 280px;gap:24px}
+@media(max-width:700px){.main{grid-template-columns:1fr}}
+.section{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px}
+.section-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:.06em;font-family:'JetBrains Mono',monospace}
+.section-body{padding:18px}
+.overview-text{font-size:14px;color:var(--muted);line-height:1.8}
+.step{display:flex;gap:14px;margin-bottom:18px}
+.step:last-child{margin-bottom:0}
+.step-num{width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);flex-shrink:0;margin-top:1px}
+.step-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.7}
+.scenario-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.scenario{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:14px;text-align:center}
+.scenario.base{border-color:var(--blue)}
+.scenario.bull{border-color:var(--green)}
+.scenario.bear{border-color:#f78166}
+.scenario-label{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.scenario-name{font-size:14px;font-weight:600;color:var(--text)}
+.scenario.base .scenario-name{color:var(--blue)}
+.scenario.bull .scenario-name{color:var(--green)}
+.scenario.bear .scenario-name{color:#f78166}
+.code-block{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#79c0ff;line-height:1.8;margin-top:14px;overflow-x:auto}
+.code-comment{color:var(--muted2)}
+.code-fn{color:#ff7b72}
+.code-str{color:#a5d6ff}
+.code-kw{color:var(--purple)}
+.side-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px}
+.side-header{padding:12px 16px;border-bottom:1px solid var(--border);font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-family:'JetBrains Mono',monospace}
+.side-body{padding:14px 16px}
+.badge-row{display:flex;flex-wrap:wrap;gap:6px}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:4px;font-size:11px;font-family:'JetBrains Mono',monospace;border:1px solid var(--border);color:var(--muted);background:var(--surface2)}
+.badge.py{border-color:#ffa657;color:#ffa657;background:#1f1208}
+.badge.method{border-color:var(--purple);color:var(--purple);background:#1a1040}
+.meta-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px}
+.meta-row:last-child{border-bottom:none;padding-bottom:0}
+.meta-label{color:var(--muted2)}
+.meta-val{color:var(--text);font-family:'JetBrains Mono',monospace;font-size:11px}
+.meta-val.green{color:var(--green)}
+.repo-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;font-weight:500;transition:all .15s;text-decoration:none}
+.repo-btn:hover{border-color:var(--blue);color:var(--blue);text-decoration:none;background:var(--surface)}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="tag">Finance · Forecasting · Python</div>
-  <h1>Financial Modeling<br>& Budget Analysis</h1>
-  <p class="sub">Multi-scenario financial forecasting model simulating revenue, expense, and business outcomes across base, optimistic, and pessimistic cases.</p>
 
-  <div class="divider"></div>
-
-  <div class="section-label">Overview</div>
-  <p class="body-text">This project builds a full financial model in Python to simulate and forecast business performance across multiple scenarios. Starting from historical or assumed inputs, the model projects revenue growth, operating expenses, and net outcomes — then stress-tests those projections under different economic assumptions.</p>
-  <p class="body-text">The multi-scenario approach produces a range of outcomes rather than a single forecast, giving a clearer picture of upside potential and downside risk under different business conditions.</p>
-
-  <div class="divider"></div>
-
-  <div class="section-label">Scenarios Modeled</div>
-  <div class="scenarios">
-    <div class="scenario">
-      <div class="scenario-label">Case 01</div>
-      <div class="scenario-name">Base</div>
-    </div>
-    <div class="scenario">
-      <div class="scenario-label">Case 02</div>
-      <div class="scenario-name">Optimistic</div>
-    </div>
-    <div class="scenario">
-      <div class="scenario-label">Case 03</div>
-      <div class="scenario-name">Pessimistic</div>
-    </div>
-  </div>
-
-  <div class="section-label">Methods</div>
-  <div class="methods">
-    <div class="method">
-      <div class="method-name">Revenue Forecasting</div>
-      <div class="method-desc">Growth rate modeling and revenue projection across time horizons and scenario assumptions</div>
-    </div>
-    <div class="method">
-      <div class="method-name">Expense Simulation</div>
-      <div class="method-desc">Fixed and variable cost modeling tied to revenue and operational drivers</div>
-    </div>
-    <div class="method">
-      <div class="method-name">Scenario Analysis</div>
-      <div class="method-desc">Side-by-side comparison of outcomes across base, bull, and bear case assumptions</div>
-    </div>
-    <div class="method">
-      <div class="method-name">Budget Variance</div>
-      <div class="method-desc">Actual vs. forecast tracking with variance decomposition and commentary</div>
-    </div>
-  </div>
-
-  <div class="section-label">Stack</div>
-  <div class="chips">
-    <span class="chip lang">Python</span>
-    <span class="chip">Pandas</span>
-    <span class="chip">NumPy</span>
-    <span class="chip">Matplotlib</span>
-    <span class="chip">Financial Modeling</span>
-  </div>
-
-  <a class="repo-link" href="https://github.com/Awo88/financial-modeling-budget-analysis" target="_blank">
-    ↗ View on GitHub
-  </a>
-
-  <div class="footer">Personal project · Source available on GitHub</div>
+<div class="topbar">
+  <a href="https://github.com/Awo88">Awo88</a>
+  <span class="topbar-sep">/</span>
+  <a href="https://github.com/Awo88/financial-modeling-budget-analysis">financial-modeling-budget-analysis</a>
+  <span class="topbar-sep">·</span>
+  <span>Public</span>
 </div>
+
+<div class="hero">
+  <div class="hero-eyebrow">// Finance · Forecasting · Scenario Analysis</div>
+  <h1 class="hero-title">Financial Modeling &amp; <span>Budget Analysis</span></h1>
+  <p class="hero-desc">Multi-scenario financial forecasting model simulating revenue, expense, and business outcomes across base, optimistic, and pessimistic cases in Python.</p>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-dot o"></div> Python</div>
+    <div class="stat-item"><div class="stat-dot b"></div> Base Case</div>
+    <div class="stat-item"><div class="stat-dot g"></div> Optimistic Case</div>
+    <div class="stat-item"><div class="stat-dot y"></div> Pessimistic Case</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="content">
+
+    <div class="section">
+      <div class="section-header"><span>📋</span> Overview</div>
+      <div class="section-body">
+        <p class="overview-text">This project builds a full financial model in Python to simulate and forecast business performance across multiple scenarios. Starting from revenue and cost drivers, the model projects income statements, operating cash flow, and key business metrics — then stress-tests those projections across different economic assumptions.<br><br>Rather than producing a single forecast, the multi-scenario approach shows a range of plausible outcomes — giving a clearer picture of upside potential and downside risk under different conditions.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><span>📊</span> Scenarios</div>
+      <div class="section-body">
+        <div class="scenario-row">
+          <div class="scenario base">
+            <div class="scenario-label">Case 01</div>
+            <div class="scenario-name">Base</div>
+          </div>
+          <div class="scenario bull">
+            <div class="scenario-label">Case 02</div>
+            <div class="scenario-name">Optimistic</div>
+          </div>
+          <div class="scenario bear">
+            <div class="scenario-label">Case 03</div>
+            <div class="scenario-name">Pessimistic</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><span>⚙</span> Methodology</div>
+      <div class="section-body">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <div class="step-title">Define Revenue Drivers</div>
+            <div class="step-desc">Model revenue as a function of growth rates, volume, and pricing assumptions — parameterized per scenario.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <div class="step-title">Build Expense Model</div>
+            <div class="step-desc">Separate fixed from variable costs. Link variable expenses to revenue and operational volume assumptions.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <div class="step-title">Project Income Statement</div>
+            <div class="step-desc">Generate a multi-year P&L for each scenario — revenue, gross profit, EBITDA, and net income.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <div class="step-title">Run Scenario Comparison</div>
+            <div class="step-desc">Output all three scenarios side by side with variance vs. base case highlighted at each line item.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">05</div>
+          <div class="step-content">
+            <div class="step-title">Budget Variance Analysis</div>
+            <div class="step-desc">Compare actuals vs. forecast, decompose variances by driver, and flag items exceeding materiality thresholds.</div>
+          </div>
+        </div>
+        <div class="code-block"><span class="code-comment"># Simulate revenue across scenarios</span>
+<span class="code-kw">scenarios</span> = {<span class="code-str">'base'</span>: 0.08, <span class="code-str">'bull'</span>: 0.15, <span class="code-str">'bear'</span>: 0.02}
+<span class="code-kw">for</span> name, growth <span class="code-kw">in</span> scenarios.<span class="code-fn">items</span>():
+    revenue[name] = base_revenue * (1 + growth) ** years</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sidebar">
+    <div class="side-card">
+      <div class="side-header">Project Info</div>
+      <div class="side-body">
+        <div class="meta-row"><span class="meta-label">Language</span><span class="meta-val">Python</span></div>
+        <div class="meta-row"><span class="meta-label">Type</span><span class="meta-val">Financial Modeling</span></div>
+        <div class="meta-row"><span class="meta-label">Scenarios</span><span class="meta-val green">3 cases</span></div>
+        <div class="meta-row"><span class="meta-label">Output</span><span class="meta-val">P&amp;L · Variance</span></div>
+      </div>
+    </div>
+
+    <div class="side-card">
+      <div class="side-header">Methods</div>
+      <div class="side-body">
+        <div class="badge-row">
+          <span class="badge method">Scenario Analysis</span>
+          <span class="badge method">Revenue Modeling</span>
+          <span class="badge method">Cost Simulation</span>
+          <span class="badge method">Variance Analysis</span>
+          <span class="badge method">Forecasting</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-card">
+      <div class="side-header">Stack</div>
+      <div class="side-body">
+        <div class="badge-row">
+          <span class="badge py">Python</span>
+          <span class="badge py">Pandas</span>
+          <span class="badge py">NumPy</span>
+          <span class="badge py">Matplotlib</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-card">
+      <div class="side-header">Repository</div>
+      <div class="side-body">
+        <a class="repo-btn" href="https://github.com/Awo88/financial-modeling-budget-analysis" target="_blank">↗ View on GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
